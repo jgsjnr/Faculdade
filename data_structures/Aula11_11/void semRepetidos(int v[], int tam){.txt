@@ -1,0 +1,36 @@
+void semRepetidos(int v[], int tam){
+	srand((unsigned)time(NULL));
+	int igualdade = 0;
+	int i = 0;
+	while(i < tam){
+		v[i] = rand()%tam+1;
+		for(int j = 0; j < i; ++j){
+			if(v[j] == v[i]){
+				igualdade = 1;
+				break;
+			}
+			else igualdade = 0;					
+		};
+		if(igualdade == 0) ++i;
+	}
+	for(int k = 0; k < tam; k++){
+		printf("valor do vetor: %d\n", v[k]);
+	};
+	system("pause");
+}
+int buscavetor(int *vetor, int tam, int valor){
+	if(tam == 0){
+		printf("Valor nao encontrado: \n");	
+		printf("Valor %d: \n", valor);
+		system("pause");
+		return -1;
+	}
+	else {
+		if(vetor[tam] == valor)
+		{
+			printf("Valor: %d\n", valor);
+			printf("Valor encontrado no indice %d \n", tam);
+		}
+		else return buscavetor(vetor, tam -1, valor);
+	}
+}

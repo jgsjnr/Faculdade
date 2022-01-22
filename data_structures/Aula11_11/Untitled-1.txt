@@ -1,0 +1,72 @@
+//Aluno: José Geraldo da Silva Júnior 	RA:1680482022037
+//Aluno: Higor Goularte Manssur			RA:
+//funcao prototipo para gerar numeros aleatorios sem repeticao
+void semRepetidos(int v[], int tam){
+    //declara a semente dos numeros aleatorios
+	srand((unsigned)time(NULL));
+    //define a variavel que vai auxiliar 
+    //na identificacao se ouve ou nao igualdade
+	int igualdade = 0;
+    //indice para o loop
+	int i = 0;
+    //loop que vai gerar os numeros aleatorios
+	while(i < tam){
+        //geracao de numeros randomicos que vao ser armazenados no vetor
+		v[i] = rand()%tam+1;
+        //inicia um loop para verificar se 
+        //essa sequencia de numeros é aleatorio
+		for(int j = 0; j < i; ++j){
+            //verifica se esse numero e igual ao numero atual 
+            //no indice desse loop de verificacao
+			if(v[j] == v[i]){
+                //se a igualdade existir ele acusa como numero 1 e fecha o 
+                //loop forçando a gerar novo numero 
+                //aleatorio para aquela posicao
+				igualdade = 1;
+                //para o processo no caso de igualdade
+				break;
+			}
+            //se nao existir igualdade ele acusa com o numero 0
+			else igualdade = 0;					
+		};
+        //se a igualdade nao existir ele aumenta 1 no indice
+        // e permite que o programa continue funcionando
+		if(igualdade == 0) ++i;
+	}
+    //loop que mostra quais os numeros gerados aleatoriamente
+	for(int k = 0; k < tam; k++){
+        //print que mostra os numeros
+		printf("valor do vetor: %d\n", v[k]);
+	};
+    //pausa o programa para visualizacao
+	system("pause");
+}
+//funcao prototipo que busca um valor em um vetor
+int buscavetor(int *vetor, int tam, int valor){
+    //verifica se chegou ao fim do indice
+	if(tam == 0){
+        //print para exibir que chegou ao fim dos indices	
+		printf("Valor nao encontrado: \n");	
+        //print que mostra o valor a ser procurado
+		printf("Valor %d: \n", valor);
+        //pausa o sistema para visualizacao
+		system("pause");
+        //return -1 que finaliza a funcao solicitada no enunciado
+		return -1;
+	}
+    //else que caso nao tenha chegado 
+    //ainda no fim ele faz a continuacao da funcao
+	else {
+        //verifica se o indice atual do vetor e igual ao valor procurado
+		if(vetor[tam] == valor)
+		{
+            //print que diz o valor procurado
+			printf("Valor: %d\n", valor);
+            //print que exibe em qual indice foi encontrado
+			printf("Valor encontrado no indice %d \n", tam);
+		}
+        //recursividade para continuar a busca caso 
+        //nao for encontrado o valor e nao seja o fim dos indices
+		else return buscavetor(vetor, tam -1, valor);
+	}
+}
